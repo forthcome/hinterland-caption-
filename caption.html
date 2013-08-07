@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+
+
+
+  <head>
+  <title>type</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://www.fadebiaye.com/style.css" />
+
+  <script type="text/javascript" src="binaryajax.js"></script>
+  <script type="text/javascript" src="exif.js"></script>
+
+
+<meta name="description" content="">
+<meta name="language" content="">
+<meta name="author" content="frank" >
+<meta name="reply-to" content="@">
+<meta name="robots" content="all">
+
+  </head>
+
+  <body>
+  <h1>Type</h1>
+
+ <p><img src="02_Ingres.jpg" width="500" id="img1" alt="" exif="true"/></p>
+ <p id="img1_caption"></p>
+        <!-- alert("I was taken by a " + make + " " + model);-->
+
+
+<script>
+document.getElementById("img1").onload = function() {
+    EXIF.getData(this, function() {
+        var make = EXIF.getTag(this, "Make"),
+            model = EXIF.getTag(this, "Model");
+            color = EXIF.getTag(this, "ColorSpace");
+            copyright = EXIF.getTag(this, "Copyright");
+            comment = EXIF.getTag(this, "UserComment");
+            description = EXIF.getTag(this, "ImageDescription");
+    document.getElementById("img1_caption").innerHTML = description;
+    });
+}
+
+document.getElementById("img2").onclick = function() {
+    EXIF.getData(this, function() {
+        alert(EXIF.pretty(this));
+    });
+}
+
+document.getElementById("img3").onclick = function() {
+    EXIF.getData(this, function() {
+        alert(EXIF.pretty(this));
+    });
+}
+
+document.getElementById('file-input').onchange = function(e) {
+    EXIF.getData(e.target.files[0], function() {
+        alert(EXIF.pretty(this));
+    });
+}
+</script>
+
+
+  </body>
+
+</html>
